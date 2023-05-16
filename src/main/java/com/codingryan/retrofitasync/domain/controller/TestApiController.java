@@ -3,6 +3,7 @@ package com.codingryan.retrofitasync.domain.controller;
 import com.codingryan.retrofitasync.domain.service.TestApiService;
 import com.codingryan.retrofitasync.domain.service.TestService;
 import lombok.RequiredArgsConstructor;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,12 +26,12 @@ public class TestApiController {
         Call<Void> call = testApiService.getTest1(delaySeconds);
         call.enqueue(new Callback<>() {
             @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
+            public void onResponse(@NotNull Call<Void> call, @NotNull Response<Void> response) {
                 testService.callback();
             }
 
             @Override
-            public void onFailure(Call<Void> call, Throwable t) {
+            public void onFailure(@NotNull Call<Void> call, @NotNull Throwable t) {
                 System.out.println("error.");
             }
         });
